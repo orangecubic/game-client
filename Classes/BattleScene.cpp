@@ -207,6 +207,8 @@ void Battle::endGame(int winnerId) {
 }
 
 void Battle::spawnEntity(const game::SpawnEntityPush* spawnEntity) {
+    if (mSimulator == nullptr)
+        return;
     auto status = spawnEntity->entity_status();
     log("spawn entity %d", spawnEntity->entity_type());
     switch (spawnEntity->entity_type()) {
@@ -266,7 +268,7 @@ void Battle::triggerCollisionEvent(const game::CollisionEventPush* collisionEven
     setEntity(this, entityB, entityBStatus);
     
     if (entityA != nullptr && entityB != nullptr) {
-        log("trigger collision event");
+        log("trigger collision event %d, %d", entityA->getEntityId(), entityB->getEntityId());
         mSimulator->triggerCollisionEvent(entityA, entityB);
     }
 }

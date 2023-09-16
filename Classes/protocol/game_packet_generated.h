@@ -273,7 +273,7 @@ FLATBUFFERS_MANUALLY_ALIGNED_STRUCT(4) RoomSetting FLATBUFFERS_FINAL_CLASS {
  private:
   uint8_t frame_rate_;
   uint8_t starting_countdown_second_;
-  uint8_t world_gravity_;
+  int8_t world_gravity_;
   uint8_t initial_player_hp_;
   uint8_t gunshot_damage_;
   uint8_t rockfalll_damage_;
@@ -303,7 +303,7 @@ FLATBUFFERS_MANUALLY_ALIGNED_STRUCT(4) RoomSetting FLATBUFFERS_FINAL_CLASS {
     (void)padding1__;
     (void)padding2__;
   }
-  RoomSetting(uint8_t _frame_rate, uint8_t _starting_countdown_second, uint8_t _world_gravity, uint8_t _initial_player_hp, uint8_t _gunshot_damage, uint8_t _rockfalll_damage, uint8_t _player_shot_cooltime, float _player_ground_movement_force, float _player_jump_velocity, uint8_t _hp_item_value)
+  RoomSetting(uint8_t _frame_rate, uint8_t _starting_countdown_second, int8_t _world_gravity, uint8_t _initial_player_hp, uint8_t _gunshot_damage, uint8_t _rockfalll_damage, uint8_t _player_shot_cooltime, float _player_ground_movement_force, float _player_jump_velocity, uint8_t _hp_item_value)
       : frame_rate_(flatbuffers::EndianScalar(_frame_rate)),
         starting_countdown_second_(flatbuffers::EndianScalar(_starting_countdown_second)),
         world_gravity_(flatbuffers::EndianScalar(_world_gravity)),
@@ -327,7 +327,7 @@ FLATBUFFERS_MANUALLY_ALIGNED_STRUCT(4) RoomSetting FLATBUFFERS_FINAL_CLASS {
   uint8_t starting_countdown_second() const {
     return flatbuffers::EndianScalar(starting_countdown_second_);
   }
-  uint8_t world_gravity() const {
+  int8_t world_gravity() const {
     return flatbuffers::EndianScalar(world_gravity_);
   }
   uint8_t initial_player_hp() const {

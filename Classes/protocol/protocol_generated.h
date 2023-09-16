@@ -164,9 +164,9 @@ struct Packet FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   bool Verify(flatbuffers::Verifier &verifier) const {
     return VerifyTableStart(verifier) &&
            VerifyField<uint16_t>(verifier, VT_VERSION, 2) &&
-           VerifyOffsetRequired(verifier, VT_MESSAGES_TYPE) &&
+           VerifyOffset(verifier, VT_MESSAGES_TYPE) &&
            verifier.VerifyVector(messages_type()) &&
-           VerifyOffsetRequired(verifier, VT_MESSAGES) &&
+           VerifyOffset(verifier, VT_MESSAGES) &&
            verifier.VerifyVector(messages()) &&
            VerifyPayloadVector(verifier, messages(), messages_type()) &&
            verifier.EndTable();
@@ -193,8 +193,6 @@ struct PacketBuilder {
   flatbuffers::Offset<Packet> Finish() {
     const auto end = fbb_.EndTable(start_);
     auto o = flatbuffers::Offset<Packet>(end);
-    fbb_.Required(o, Packet::VT_MESSAGES_TYPE);
-    fbb_.Required(o, Packet::VT_MESSAGES);
     return o;
   }
 };
